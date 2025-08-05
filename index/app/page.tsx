@@ -12,8 +12,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("note", note);
-    console.log("Saved note to storage:", note);
+    const saved = localStorage.getItem("note");
+    if (saved) {
+      setNote(saved);
+      console.log("Loaded note from storage:", saved);
+    }
   }, [note]);
 
   console.log("Rendering with note:", note);
@@ -22,7 +25,7 @@ export default function Home() {
     <div>
       <input
         type="text"
-        value={note}
+        
         onChange={(e) => setNote(e.target.value)}
         placeholder="Type your notes here"
       />
