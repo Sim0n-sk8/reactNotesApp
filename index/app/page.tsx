@@ -1,44 +1,36 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 
-
-
-
-
 export default function Home() {
+  const [note, setNote] = useState("");
 
-const[note,setNote] = useState("");
+  useEffect(() => {
+    const saved = localStorage.getItem("note");
+    if (saved) setNote(saved);
+    console.log("Loaded note from storage:", saved);
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("note", note);
+    console.log("Saved note to storage:", note);
+  }, [note]);
 
-
-//saving the mf notes
-useEffect(() =>{
-  localStorage.setItem("note",note);
-  //HEY MA AS MA OOIT DIE CODE SIEN HIER LOG EK 
-  console.log("Saved note to localStorage:", note);
-},[note])
-
-
-
-
-
+  console.log("Rendering with note:", note);
 
   return (
     <div>
-        <input
+      <input
         type="text"
-        className="notePad"
-        placeholder="Type your notes here"
         value={note}
         onChange={(e) => setNote(e.target.value)}
+        placeholder="Type your notes here"
       />
-
-      {/* this serves no actual purpose but im just messing around
-      <p>{note}</p>*/}
+      <p>{note}</p>
     </div>
   );
 }
+
 
 
 
