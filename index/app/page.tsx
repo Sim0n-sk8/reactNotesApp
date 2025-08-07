@@ -5,18 +5,17 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [note, setNote] = useState("");
 
+  // Load note once on mount
   useEffect(() => {
     const saved = localStorage.getItem("note");
     if (saved) setNote(saved);
     console.log("Loaded note from storage:", saved);
   }, []);
 
+  // Save note whenever it changes
   useEffect(() => {
-    const saved = localStorage.getItem("note");
-    if (saved) {
-      setNote(saved);
-      console.log("Loaded note from storage:", saved);
-    }
+    localStorage.setItem("note", note);
+    console.log("Saved note to storage:", note);
   }, [note]);
 
   console.log("Rendering with note:", note);
@@ -25,7 +24,7 @@ export default function Home() {
     <div>
       <input
         type="text"
-        
+        value={note}
         onChange={(e) => setNote(e.target.value)}
         placeholder="Type your notes here"
       />
