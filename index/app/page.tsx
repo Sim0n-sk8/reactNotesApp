@@ -36,6 +36,11 @@ export default function Home() {
 
 
 
+
+/*Ui??
+
+purple
+
 /*
 📝 Notes App - Project Plan
 
